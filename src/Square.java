@@ -44,7 +44,6 @@ public class Square extends Sprite{
     }
 
     public void move(){
-
         vx += ax * dt;
         vy += ay * dt;
         x += vx * dt;
@@ -55,18 +54,15 @@ public class Square extends Sprite{
             vx = vx * 0.8;
             y = 550;
         }
-
         if (Math.abs(this.vy) < 0.1){
             ay = 0;
             vy = 0;
             ax = 0;
             vx = 0;
         }
-
-
-
-
     }
+
+
 
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();

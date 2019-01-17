@@ -1,3 +1,5 @@
+import org.w3c.dom.css.Rect;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -54,14 +56,28 @@ public class Render extends JPanel implements ActionListener{
     public void addSquare(Square square){
         squares.add(square);
     }
+    public void removeSquare(){
+        if(squares.size() != 0){
+            squares.remove(squares.size() - 1);}
+        }
+
 
     @Override
     public void actionPerformed(ActionEvent e){
         for(Square square : squares){
             square.move();
         }
-
+        checkCollisions();
         repaint();
+    }
+
+    private void checkCollisions(){
+        for (Square square : squares){
+            for Square square2 : squares){
+                if (square.getX()+21 >= square2.getX() && square2.getY() < square1.getY())
+            }
+
+        }
     }
 
     private class TAdapter extends KeyAdapter{
