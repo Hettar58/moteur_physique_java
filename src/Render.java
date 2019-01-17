@@ -1,20 +1,21 @@
 import java.awt.*;
-import javax.swing.JPanel;
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //le rendu et la gestion des inputs se font dans la même classe.
-public class Render extends JPanel{
+public class Render extends JPanel implements ActionListener{
     private Timer timer;
+    private List<Square> squares;
+    private List<Block> blocks;
     private Square square1;
-    private final int PERIOD_INTERVAL = 16;
-    private final int INITIAL_DELAY = 250;
-
+    private Floor floor1;
+    private final int DELAY = 20;
 
     public Render(){
         initRender();
@@ -25,42 +26,58 @@ public class Render extends JPanel{
 
         setBackground(Color.white);
 
-        square1 = new Square();
+        squares = new ArrayList<>();
+        blocks = new ArrayList<>();
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new ScheduleTask(), INITIAL_DELAY, PERIOD_INTERVAL);
+
+        floor1 = new Floor(0, 570);
+        timer = new Timer(DELAY, this);
+        timer.start();
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        doDrawing(g);
+        draw(g);
         Toolkit.getDefaultToolkit().sync();
     }
 
-    private void doDrawing(Graphics g){
+    private void draw(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(square1.getImage(), (int)square1.getX(), (int)square1.getY(), this);
+        g2d.drawImage(floor1.getImage(),floor1.getX(), floor1.getY(), this);
+        for(Square square : squares){
+            g2d.drawImage(square.getImage(), square.getX(), square.getY(), this);
+        }
+
     }
 
-    private class ScheduleTask extends TimerTask{
-        @Override
-        public void run(){
-            repaint((int)square1.getX()-1, (int)square1.getY()-1, 22, 22);
-            square1.move();
-            repaint((int)square1.getX(), (int)square1.getY(), 20, 20);
+    public void addSquare(Square square){
+        squares.add(square);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        for(Square square : squares){
+            square.move();
         }
+
+        repaint();
     }
 
     private class TAdapter extends KeyAdapter{
         @Override
         public void keyReleased(KeyEvent e){
-            square1.keyReleased(e);
+            for(Square square : squares){
+                square.keyReleased(e);
+            }
+
         }
 
         @Override
         public void keyPressed(KeyEvent e){
-            square1.keyPressed(e);
+            for(Square square : squares){
+                square.keyPressed(e);
+            }
         }
     }
 }
