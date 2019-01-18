@@ -19,12 +19,42 @@ public class Main extends JFrame{
         ajoutSquare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int x = Integer.parseInt(JOptionPane.showInputDialog(new JFrame(), "Entrez la position X", null));
-                int y = Integer.parseInt(JOptionPane.showInputDialog(new JFrame(), "entrez la position Y", null));
-                int masse = Integer.parseInt(JOptionPane.showInputDialog(new JFrame(), "Entrez la masse de l'objet", null));
-                double angle = Double.parseDouble(JOptionPane.showInputDialog(new JFrame(), "Entrez l'angle de la trajectoire de l'objet", null));
-                int velocite = Integer.parseInt(JOptionPane.showInputDialog(new JFrame(), "Entrez la vélocité de l'objet", null));
-                render.addSquare(new Square(x, y, angle, masse, velocite));
+                JFrame popupFrame = new JFrame();
+                popupFrame.setLayout(new FlowLayout());
+                JTextField xInput = new JTextField(10);
+                JTextField yInput = new JTextField(10);
+                JTextField masseInput = new JTextField(10);
+                JTextField angleInput = new JTextField(10);
+                JTextField velociteInput = new JTextField(10);
+                popupFrame.setTitle("Créer un nouvel objet");
+                popupFrame.add(new JLabel("Entrez la position X"));
+                popupFrame.add(xInput);
+                popupFrame.add(new JLabel("Entrez la position Y"));
+                popupFrame.add(yInput);
+                popupFrame.add(new JLabel("Entrez la masse de l'objet"));
+                popupFrame.add(masseInput);
+                popupFrame.add(new JLabel("Entrez l'angle de la trajectoire"));
+                popupFrame.add(angleInput);
+                popupFrame.add(new JLabel("Entrez la vélocité de l'objet"));
+                popupFrame.add(velociteInput);
+                JButton closePopup = new JButton("OK");
+                popupFrame.add(closePopup);
+
+                popupFrame.setSize(240, 300);
+                popupFrame.setVisible(true);
+
+                closePopup.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int x = Integer.parseInt(xInput.getText());
+                        int y = Integer.parseInt(yInput.getText());
+                        int masse = Integer.parseInt(masseInput.getText());
+                        double angle = Double.parseDouble(angleInput.getText());
+                        int velocite = Integer.parseInt(velociteInput.getText());
+                        render.addSquare(new Square(x, y, angle, masse, velocite, 0.16, 0.8, 9.81, 0.1));
+                        popupFrame.dispose();
+                    }
+                });
             }
         });
 
@@ -34,6 +64,16 @@ public class Main extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 render.removeSquare();
+            }
+        });
+
+        JButton params = new JButton("Paramètres");
+        params.setBounds(225, 0, 100, 25);
+        params.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame popupFrame = new JFrame();
+
             }
         });
 

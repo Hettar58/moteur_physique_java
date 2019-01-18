@@ -11,19 +11,22 @@ import java.util.List;
 
 
 //le rendu et la gestion des inputs se font dans la même classe.
-public class Render extends JPanel implements ActionListener{
+public class Render extends JPanel implements ActionListener {
     private Timer timer;
     private List<Square> squares;
     private List<Block> blocks;
     private Square square1;
     private Floor floor1;
-    private final int DELAY = 20;
 
-    public Render(){
+    private int DELAY = 16;
+    private double absorbtion = 0.8;
+    private double movemenetThresold = 0.1;
+
+    public Render() {
         initRender();
     }
 
-    private void initRender(){
+    private void initRender() {
         addKeyListener(new TAdapter());//creation du grabber pour les input.
 
         setBackground(Color.white);
@@ -38,28 +41,37 @@ public class Render extends JPanel implements ActionListener{
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
         Toolkit.getDefaultToolkit().sync();
     }
 
-    private void draw(Graphics g){
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(floor1.getImage(),floor1.getX(), floor1.getY(), this);
-        for(Square square : squares){
+    private void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(floor1.getImage(), floor1.getX(), floor1.getY(), this);
+        for (Square square : squares) {
             g2d.drawImage(square.getImage(), square.getX(), square.getY(), this);
         }
 
     }
 
-    public void addSquare(Square square){
+    public void addSquare(Square square) {
         squares.add(square);
     }
-    public void removeSquare(){
-        if(squares.size() != 0){
-            squares.remove(squares.size() - 1);}
+
+    public void removeSquare() {
+        if (squares.size() != 0) {
+            squares.remove(squares.size() - 1);
         }
+    }
+
+    public void setAbsorbtion(double absorbtion){
+        for(Square square : squares){
+
+        }
+    }
+
 
 
     @Override
@@ -72,9 +84,16 @@ public class Render extends JPanel implements ActionListener{
     }
 
     private void checkCollisions(){
-        for (Square square : squares){
-            for Square square2 : squares){
-                if (square.getX()+21 >= square2.getX() && square2.getY() < square1.getY())
+        for (int i = 0; i < squares.size(); i++){
+            for (int j = 0;j < squares.size(); j++){
+                if (i != j) {
+                    if (squares.get(i).getX() + 21 >= squares.get(j).getX() && (squares.get(j).getY() < squares.get(i).getY() && squares.get(i).getY() < squares.get(j).getY() + 21)) {
+                        squares.get(i).invertVx();
+                    }
+                    if (squares.get(i).getY() + 21 >= squares.get(j).getY() && (squares.get(j).getX() < squares.get(i).getX() && squares.get(i).getX() < squares.get(j).getX() + 21)) {
+                        squares.get(i).invertVy();
+                    }
+                }
             }
 
         }
