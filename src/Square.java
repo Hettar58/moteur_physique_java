@@ -60,6 +60,23 @@ public class Square extends Sprite{
 
     public void invertVy(){ this.vy = -this.vy; }
 
+    public void setDt(double dt){
+        this.dt = dt;
+    }
+
+    public void setAbsorbtion(double absorbtion){
+        this.absorbtion = absorbtion;
+    }
+
+    public void setMovementThresold(double movementThresold){
+        this.movementThresold = movementThresold;
+    }
+
+    public void setGravity(double gravity){
+        this.gravity = gravity;
+        this.ay = this.masse * this.gravity;
+    }
+
     public void move(){
         vx += ax * dt;
         vy += ay * dt;

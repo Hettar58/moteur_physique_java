@@ -21,6 +21,8 @@ public class Render extends JPanel implements ActionListener {
     private int DELAY = 16;
     private double absorbtion = 0.8;
     private double movemenetThresold = 0.1;
+    private double gravity = 9.81;
+    private double dt = 0.16;
 
     public Render() {
         initRender();
@@ -67,12 +69,37 @@ public class Render extends JPanel implements ActionListener {
     }
 
     public void setAbsorbtion(double absorbtion){
+        this.absorbtion = absorbtion;
         for(Square square : squares){
-
+            square.setAbsorbtion(absorbtion);
         }
     }
 
+    public void setMovemementThresold(double movementThresold){
+        this.movemenetThresold = movementThresold;
+        for (Square square : squares){
+            square.setMovementThresold(movementThresold);
+        }
+    }
 
+    public void setGravity(double gravity){
+        this.gravity = gravity;
+        for(Square square : squares){
+            square.setGravity(gravity);
+        }
+    }
+
+    public void setDt(double dt){
+        this.dt = dt;
+        for (Square square : squares){
+            square.setDt(dt);
+        }
+    }
+
+    public double getDt(){return this.dt;}
+    public double getAbsorbtion(){return this.absorbtion;}
+    public double getMovemenetThresold(){return this.movemenetThresold;}
+    public double getGravity(){return this.gravity;}
 
     @Override
     public void actionPerformed(ActionEvent e){

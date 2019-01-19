@@ -73,15 +73,36 @@ public class Main extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame popupFrame = new JFrame();
+                JButton editDt = new JButton("modifier");
+                JButton editAbsorbtion = new JButton("modifier");
+                JButton editGravity = new JButton("modifier");
+                JButton editMovementThresold = new JButton("modifier");
+                JLabel dtLabel = new JLabel(" dt: "+render.getDt());
+                JLabel AbsorbtionLabel = new JLabel(" Absorbtion: "+render.getAbsorbtion());
+                JLabel gravityLabel = new JLabel(" Gravity: "+render.getGravity());
+                JLabel movementThresoldLabel = new JLabel(" MovementThresold: "+render.getMovemenetThresold());
+                popupFrame.setLayout(new GridLayout(4, 2));
 
+                popupFrame.add(dtLabel);
+                popupFrame.add(editDt);
+                popupFrame.add(AbsorbtionLabel);
+                popupFrame.add(editAbsorbtion);
+                popupFrame.add(gravityLabel);
+                popupFrame.add(editGravity);
+                popupFrame.add(movementThresoldLabel);
+                popupFrame.add(editMovementThresold);
+
+                popupFrame.setSize(300, 200);
+                popupFrame.setVisible(true);
             }
         });
 
-        Square square1 = new Square(100, 100, 75.0, 10, 100);
+        Square square1 = new Square(100, 100, 75.0, 10, 100, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold());
         Square square2 = new Square(1,1);
 
         render.add(ajoutSquare);
         render.add(supprSquare);
+        render.add(params);
         render.addSquare(square1);
         render.addSquare(square2);
 
