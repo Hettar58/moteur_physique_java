@@ -83,11 +83,22 @@ public class Square extends Sprite{
         x += vx * dt;
         y += vy * dt;
         //System.out.println("x="+this.x+" y="+ this.y+" vx="+ vx+" vy="+vy+" ax="+ ax+ " ay="+ ay);
-        if(y >= 550){
-            vy = -vy * absorbtion;
-            vx = vx * absorbtion;
-            y = 550;
+
+        if(System.getProperty("os.name").equals("Windows 10")){
+            if (y >= 530){
+                vy = -vy * absorbtion;
+                vx = vx * absorbtion;
+                y = 530;
+            }
         }
+        else {
+            if (y >= 550) {
+                vy = -vy * absorbtion;
+                vx = vx * absorbtion;
+                y = 550;
+            }
+        }
+
         if (Math.abs(this.vy) < movementThresold){
             ay = 0;
             vy = 0;

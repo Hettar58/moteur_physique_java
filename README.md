@@ -11,6 +11,6 @@ Reste à faire:
 Pistes d'amélioration:
 * Prédiction de trajectoire
 * Déplacement de la caméra pour cibler squares hors champ
-* accès aux paramètres du moteur: gravité,etc..
+* accès aux paramètres du moteur: gravité,etc.. =============== FAIT
 * affichage et modification de ces paramètres.
 * 

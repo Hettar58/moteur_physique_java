@@ -20,7 +20,7 @@ public class Render extends JPanel implements ActionListener {
 
     private int DELAY = 16;
     private double absorbtion = 0.8;
-    private double movemenetThresold = 0.1;
+    private double movemenetThresold = 0.01;
     private double gravity = 9.81;
     private double dt = 0.16;
 
@@ -36,8 +36,13 @@ public class Render extends JPanel implements ActionListener {
         squares = new ArrayList<>();
         blocks = new ArrayList<>();
 
-
-        floor1 = new Floor(0, 570);
+        System.out.println(System.getProperty("os.name"));
+        if (System.getProperty("os.name").equals("Windows 10")){
+            floor1 = new Floor(0, 550);
+        }
+        else{
+            floor1 = new Floor(0, 570);
+        }
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -114,11 +119,11 @@ public class Render extends JPanel implements ActionListener {
         for (int i = 0; i < squares.size(); i++){
             for (int j = 0;j < squares.size(); j++){
                 if (i != j) {
-                    if (squares.get(i).getX() + 21 >= squares.get(j).getX() && (squares.get(j).getY() < squares.get(i).getY() && squares.get(i).getY() < squares.get(j).getY() + 21)) {
-                        squares.get(i).invertVx();
-                    }
-                    if (squares.get(i).getY() + 21 >= squares.get(j).getY() && (squares.get(j).getX() < squares.get(i).getX() && squares.get(i).getX() < squares.get(j).getX() + 21)) {
-                        squares.get(i).invertVy();
+                    Square sq1 = squares.get(i);
+                    Square sq2 = squares.get(j);
+                    if(sq1.getBounds().intersects(sq2.getBounds())){
+                        sq1.invertVx();
+                        sq1.invertVy();
                     }
                 }
             }
