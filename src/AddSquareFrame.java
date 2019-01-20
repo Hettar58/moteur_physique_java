@@ -11,6 +11,11 @@ public class AddSquareFrame extends JFrame implements ActionListener {
     private JTextField angleInput;
     private JTextField velociteInput;
     private JButton closePopup;
+    private JLabel xLabel;
+    private JLabel yLabel;
+    private JLabel masseLabel;
+    private JLabel angleLabel;
+    private JLabel velociteLabel;
 
     public AddSquareFrame(Render render){
         xInput = new JTextField(10);
@@ -19,6 +24,11 @@ public class AddSquareFrame extends JFrame implements ActionListener {
         angleInput = new JTextField(10);
         velociteInput = new JTextField(10);
         closePopup = new JButton("OK");
+        xLabel = new JLabel("Entrez la position X");
+        yLabel = new JLabel("Entrez la position Y");
+        masseLabel = new JLabel("Entrez la masse de l'objet");
+        angleLabel = new JLabel("Entrez l'angle de la trajectoire de l'objet");
+        velociteLabel = new JLabel("Entrez la vélocité de l'objet");
         this.render = render;
     }
 
@@ -29,15 +39,15 @@ public class AddSquareFrame extends JFrame implements ActionListener {
             this.setLayout(new FlowLayout());
 
             this.setTitle("Créer un nouvel objet");
-            this.add(new JLabel("Entrez la position X"));
+            this.add(xLabel);
             this.add(xInput);
-            this.add(new JLabel("Entrez la position Y"));
+            this.add(yLabel);
             this.add(yInput);
-            this.add(new JLabel("Entrez la masse de l'objet"));
+            this.add(masseLabel);
             this.add(masseInput);
-            this.add(new JLabel("Entrez l'angle de la trajectoire"));
+            this.add(angleLabel);
             this.add(angleInput);
-            this.add(new JLabel("Entrez la vélocité de l'objet"));
+            this.add(velociteLabel);
             this.add(velociteInput);
 
             this.add(closePopup);
@@ -56,6 +66,11 @@ public class AddSquareFrame extends JFrame implements ActionListener {
         double angle = Double.parseDouble(angleInput.getText());
         int velocite = Integer.parseInt(velociteInput.getText());
         render.addSquare(new Square(x, y, angle, masse, velocite, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold()));
+        xInput.setText("");
+        yInput.setText("");
+        masseInput.setText("");
+        angleInput.setText("");
+        velociteInput.setText("");
         this.dispose();
     }
 }

@@ -2,7 +2,7 @@
 Portage du moteur physique 2D Python en Java
 
 Reste à faire:
-* détéction de collisions entre tous les objets ==========================
+* détéction de collisions entre tous les objets ========================== FAIT
 * implémentation effective des blocs (ne pas oublier de faire une texture)=======
 * interactions avec la souris pour attraper/relancer les squares ==============
 * fonction pour supprimer des objets =============================== FAIT

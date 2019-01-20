@@ -1,6 +1,7 @@
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 
-public class Square extends Sprite{
+public class Square extends Sprite implements MouseListener {
     private double angle;
     private int masse;
     private int velocite;
@@ -12,6 +13,7 @@ public class Square extends Sprite{
     private double gravity;
     private double absorbtion;
     private double movementThresold;
+    private boolean move;
 
     public Square(int x, int y){
         super(x, y);
@@ -27,6 +29,7 @@ public class Square extends Sprite{
         this.ay = masse * gravity;
         this.vx = this.velocite * Math.cos(this.angle);
         this.vy = -this.velocite * Math.sin(this.angle);
+        this.move = true;
 
         loadImage("src/res/square.png");
         getImageDimensions();
@@ -47,7 +50,7 @@ public class Square extends Sprite{
         this.ay = masse * gravity;
         this.vx = this.velocite * Math.cos(this.angle);
         this.vy = -this.velocite * Math.sin(this.angle);
-
+        this.move = true;
         loadImage("src/res/square.png");
         getImageDimensions();
         System.out.println("created object " + "x="+this.x+" y="+ this.y+" masse="+this.masse+" velocite="+this.velocite+" angle="+this.angle+" vx="+ vx+" vy="+vy+" ax="+ ax+ " ay="+ ay);
