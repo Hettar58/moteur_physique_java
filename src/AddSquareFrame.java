@@ -65,7 +65,9 @@ public class AddSquareFrame extends JFrame implements ActionListener {
         int masse = Integer.parseInt(masseInput.getText());
         double angle = Double.parseDouble(angleInput.getText());
         int velocite = Integer.parseInt(velociteInput.getText());
-        render.addSquare(new Square(x, y, angle, masse, velocite, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold()));
+        Square square = new Square(x, y, angle, masse, velocite, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold());
+
+        render.addSquare(square);
         xInput.setText("");
         yInput.setText("");
         masseInput.setText("");

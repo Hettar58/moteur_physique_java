@@ -34,11 +34,14 @@ public class Main extends JFrame{
         Square square1 = new Square(100, 100, 75.0, 10, 100, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold());
         Square square2 = new Square(1,1);
 
+        Block block1 = new Block(200, 0);
+
         render.add(ajoutSquare);
         render.add(supprSquare);
         render.add(params);
         render.addSquare(square1);
         render.addSquare(square2);
+        render.addBlock(block1);
 
         setTitle("Moteur Physique 2D");
         setSize(800, 600);

@@ -1,11 +1,8 @@
-import org.w3c.dom.css.Rect;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Render extends JPanel implements ActionListener {
     private Square square1;
     private Floor floor1;
 
-    private int DELAY = 16;
+    private int DELAY = 50;
     private double absorbtion = 0.8;
     private double movemenetThresold = 0.01;
     private double gravity = 9.81;
@@ -29,8 +26,6 @@ public class Render extends JPanel implements ActionListener {
     }
 
     private void initRender() {
-        addKeyListener(new TAdapter());//creation du grabber pour les input.
-
         setBackground(Color.white);
 
         squares = new ArrayList<>();
@@ -60,11 +55,19 @@ public class Render extends JPanel implements ActionListener {
         for (Square square : squares) {
             g2d.drawImage(square.getImage(), square.getX(), square.getY(), this);
         }
-
+        for(Block block : blocks){
+            g2d.drawImage(block.getImage(), block.getX(), block.getY(), this);
+        }
     }
 
     public void addSquare(Square square) {
+        addMouseListener(square);
+        addMouseMotionListener(square);
         squares.add(square);
+    }
+
+    public void addBlock(Block block){
+        blocks.add(block);
     }
 
     public void removeSquare() {
@@ -127,23 +130,13 @@ public class Render extends JPanel implements ActionListener {
                     }
                 }
             }
-
-        }
-    }
-
-    private class TAdapter extends KeyAdapter{
-        @Override
-        public void keyReleased(KeyEvent e){
-            for(Square square : squares){
-                square.keyReleased(e);
-            }
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e){
-            for(Square square : squares){
-                square.keyPressed(e);
+            for (int j = 0; j < blocks.size(); j++) {
+                Block bq1 = blocks.get(j);
+                Square sq = squares.get(i);
+                if (sq.getBounds().intersects(bq1.getBounds())) {
+                    sq.invertVx();
+                    sq.invertVy();
+                }
             }
         }
     }
