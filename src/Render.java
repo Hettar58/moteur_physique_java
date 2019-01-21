@@ -15,7 +15,7 @@ public class Render extends JPanel implements ActionListener {
     private Square square1;
     private Floor floor1;
 
-    private int DELAY = 50;
+    private int DELAY = 16;
     private double absorbtion = 0.8;
     private double movemenetThresold = 0.01;
     private double gravity = 9.81;

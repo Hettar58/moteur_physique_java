@@ -33,24 +33,28 @@ public class ParamsFrame extends JFrame implements ActionListener {
             double dt = Double.parseDouble(JOptionPane.showInputDialog(this, "Entrez la nouvelle valeur", null));
             render.setDt(dt);
             System.out.println("dt modified: "+dt);
+            dtLabel.setText(" dt: "+render.getDt());
         }
         else{
             if(e.getSource() == editMovementThresold){
                 double movementThresold = Double.parseDouble(JOptionPane.showInputDialog(this, "entrez la nouvelle valeur", null));
                 render.setMovemementThresold(movementThresold);
                 System.out.println("MovementThresold modified: "+movementThresold);
+                movementThresoldLabel.setText(" MovementThresold: "+render.getMovemenetThresold());
             }
             else{
                 if(e.getSource() == editGravity){
                     double gravity = Double.parseDouble(JOptionPane.showInputDialog(this, "entrez la nouvelle valeur", null));
                     render.setGravity(gravity);
                     System.out.println("gravity modified: "+gravity);
+                    gravityLabel.setText(" Gravity: "+render.getGravity());
                 }
                 else {
                     if(e.getSource() == editAbsorbtion){
                         double absorbtion = Double.parseDouble(JOptionPane.showInputDialog(this, "Entrez la nouvelle valeur", null));
                         render.setAbsorbtion(absorbtion);
                         System.out.println("absorbtion modified: "+absorbtion);
+                        absorbtionLabel.setText(" Absorbtion: "+render.getAbsorbtion());
                     }
                     else{
                         this.setLayout(new GridLayout(4, 2));
@@ -64,7 +68,7 @@ public class ParamsFrame extends JFrame implements ActionListener {
                         this.add(movementThresoldLabel);
                         this.add(editMovementThresold);
 
-                        this.setSize(300, 200);
+                        this.setSize(350, 200);
                         this.setVisible(true);
                         editDt.addActionListener(this);
                         editAbsorbtion.addActionListener(this);

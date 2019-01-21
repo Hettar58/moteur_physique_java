@@ -13,13 +13,17 @@ public class Main extends JFrame{
         Render render = new Render();
         render.setLayout(null);
         add(render);
-
-        JButton ajoutSquare = new JButton("Créer");
-        ajoutSquare.setBounds(0, 0, 100, 25);
+        JMenuBar barre = new JMenuBar();
+        JMenu menuAjout = new JMenu("Ajouter");
+        JMenu menuSupprimer = new JMenu("Supprimer");
+        JMenu menuParams = new JMenu("Paramètres");
+        JMenuItem ajoutSquare = new JMenuItem("Ajouter un square");
         ajoutSquare.addActionListener(new AddSquareFrame(render));
 
-        JButton supprSquare = new JButton("Supprimer");
-        supprSquare.setBounds(100, 0, 125, 25);
+        JMenuItem ajoutBlock = new JMenuItem("Ajouter un block");
+        ajoutBlock.addActionListener(new AddBlockFrame(render));
+
+        JMenuItem supprSquare = new JMenuItem("Supprimer");
         supprSquare.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,8 +31,7 @@ public class Main extends JFrame{
             }
         });
 
-        JButton params = new JButton("Paramètres");
-        params.setBounds(225, 0, 125, 25);
+        JMenuItem params = new JMenuItem(" accéder aux paramètres");
         params.addActionListener(new ParamsFrame(render));
 
         Square square1 = new Square(100, 100, 75.0, 10, 100, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold());
@@ -36,15 +39,22 @@ public class Main extends JFrame{
 
         Block block1 = new Block(200, 0);
 
-        render.add(ajoutSquare);
-        render.add(supprSquare);
-        render.add(params);
+        menuParams.add(params);
+        menuAjout.add(ajoutSquare);
+        menuAjout.add(ajoutBlock);
+        menuSupprimer.add(supprSquare);
+
+        barre.add(menuAjout);
+        barre.add(menuSupprimer);
+        barre.add(menuParams);
+        setJMenuBar(barre);
+
         render.addSquare(square1);
         render.addSquare(square2);
         render.addBlock(block1);
 
         setTitle("Moteur Physique 2D");
-        setSize(800, 600);
+        setSize(800, 620);
 
         setLocationRelativeTo(null);
         setResizable(false);

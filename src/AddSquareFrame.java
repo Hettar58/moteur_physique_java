@@ -17,6 +17,7 @@ public class AddSquareFrame extends JFrame implements ActionListener {
     private JLabel angleLabel;
     private JLabel velociteLabel;
 
+
     public AddSquareFrame(Render render){
         xInput = new JTextField(10);
         yInput = new JTextField(10);
@@ -34,10 +35,10 @@ public class AddSquareFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == closePopup){createSquare();}
-        else {
+        if (e.getSource() == closePopup){
+            this.createSquare();
+        } else {
             this.setLayout(new FlowLayout());
-
             this.setTitle("Créer un nouvel objet");
             this.add(xLabel);
             this.add(xInput);
@@ -49,13 +50,11 @@ public class AddSquareFrame extends JFrame implements ActionListener {
             this.add(angleInput);
             this.add(velociteLabel);
             this.add(velociteInput);
-
             this.add(closePopup);
-
-            this.setSize(240, 300);
+            this.setSize(240, 350);
             this.setVisible(true);
-
             closePopup.addActionListener(this);
+
         }
     }
 
@@ -66,13 +65,7 @@ public class AddSquareFrame extends JFrame implements ActionListener {
         double angle = Double.parseDouble(angleInput.getText());
         int velocite = Integer.parseInt(velociteInput.getText());
         Square square = new Square(x, y, angle, masse, velocite, render.getDt(), render.getAbsorbtion(), render.getGravity(), render.getMovemenetThresold());
-
         render.addSquare(square);
-        xInput.setText("");
-        yInput.setText("");
-        masseInput.setText("");
-        angleInput.setText("");
-        velociteInput.setText("");
         this.dispose();
     }
 }
