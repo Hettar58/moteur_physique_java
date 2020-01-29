@@ -1,5 +1,6 @@
-# moteur_physique_java
+## moteur_physique_java
 Portage du moteur physique 2D Python en Java
+# Projet crée/compilé sous IntelliJ IDEA
 
 Reste à faire:
 * détéction de collisions entre tous les objets || FAIT
